@@ -35,7 +35,7 @@ label{
     align-items: center;
     background-color: white;
     color: black;
-    border: 3px solid #007BFF;
+    border: 3px solid #003268;
     padding: 10px 20px;
     font-family: sans-serif;
     border-radius: 4px;
@@ -49,7 +49,7 @@ label{
     background-color: white;
     color: black;
     border: 0px;
-    border-bottom: 2px solid #007BFF;
+    border-bottom: 2px solid #003268;
     padding: 6px 8px;
     font-family: sans-serif;
 }
@@ -85,7 +85,7 @@ input[type="file"] {
 button {
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #003268;
     color: white;
     border-radius: 4px;
     cursor: pointer;
@@ -93,7 +93,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #003268;
 }
 
 #result-container {
@@ -109,7 +109,7 @@ h2 {
     font-family: monospace;
     white-space: pre-wrap;
     text-align: left;
-    color: #273991;
+    color: #003268;
     max-height: 580px;
     overflow: auto;
 }
@@ -123,9 +123,9 @@ h2 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #437bfb;
+    background: #003268;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #437bfb;
+    background: #003268;
 }
