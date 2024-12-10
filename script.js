@@ -1,3 +1,16 @@
+const fileInputElement1 = document.getElementById("file1");
+const fileInputElement2 = document.getElementById("file2");
+
+const fileLabel1 = document.getElementById('fileLabel1');
+const fileLabel2 = document.getElementById('fileLabel2');
+
+fileInputElement1.addEventListener('change', function(){
+    fileLabel1.textContent = this.files[0].name
+})
+fileInputElement2.addEventListener('change', function(){
+    fileLabel2.textContent = this.files[0].name
+})
+
 function mesclarCSS() {
     const prefixValue = document.getElementById("prefix").value;
 
@@ -86,8 +99,7 @@ function processarCSS(cssContent1, cssContent2, prefixValue) {
 
     alert("Arquivos mesclados com sucesso.");
 }
-
-function copiar() {
+function copiar () {
     navigator.clipboard.writeText(document.getElementById("result").textContent);
     alert("Copiado com sucesso!");
 }
