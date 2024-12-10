@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    height: min-content;
+    max-width: 800px;
+    text-align: center;
+    /* overflow: auto; */
+}
+
+.main-header {
+    display: grid;
+    grid-template-rows: 50px 20px 60px 60px 100px;
+}
+
+label{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 3px solid #007BFF;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+#prefix {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 0px;
+    border-bottom: 2px solid #007BFF;
+    padding: 6px 8px;
+    font-family: sans-serif;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container-prefix {
+    width: 50%;
+    margin: auto;
+}
+
+input[type="file"] {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#prefix {
+    display: block;
+    margin: auto;
+}
+
+.header-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result-container {
+    margin-top: 30px;
+}
+
+h2 {
+    color: #333;
+}
+
+#result {
+    margin-top: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    text-align: left;
+    color: #273991;
+    max-height: 580px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #437bfb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #437bfb;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Arquivos CSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-header">
+            <h1>Comparador de Arquivos CSS</h1>
+            <p>Carregue dois arquivos CSS para mesclar.</p>
+            <input type="file" id="file1" hidden accept=".css" />
+            <label for="file1" class="label" id="fileLabel1">Escolher arquivo 1</label>
+            <input type="file" id="file2" hidden accept=".css" />
+            <label for="file2" class="label" id="fileLabel2">Escolher arquivo 2</label>
+
+            <div class="container-prefix">
+                <p>Prefixo para as classes e ids do segundo arquivo que serão implementados no primeiro.</p>
+                <input type="text" id="prefix" placeholder="Prefixo" value="det-" />
+            </div>
+            <button onclick="mesclarCSS()">Mesclar</button>
+        </div>
+
+        <div id="result-container">
+            <div class="header-result">
+                <h2>Resultado:</h2>
+                <button onclick="copiar()">Copiar</button>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
