@@ -93,7 +93,70 @@ function processarCSS(cssContent1, cssContent2, prefixValue) {
         }
     });
 
-    const outputCSS = mergedRules.map(rule => `${rule.selector} {\n    ${rule.rules.split(";").filter(Boolean).join(";    ")}\n}`).join("\n\n");
+    const mergeMediaQueries = (media1, media2) => {
+        const convertToDictionary = (mediaQueries) => Object.fromEntries(mediaQueries.map(mq => [mq.selector, mq.rules]));
+        const mediaDict1 = convertToDictionary(media1), mediaDict2 = convertToDictionary(media2);
+        const allSelectors = new Set([...Object.keys(mediaDict1), ...Object.keys(mediaDict2)]);
+        const mergedMediaQueries = [];
+
+        allSelectors.forEach(selector => {
+            const mediaRules1 = mediaDict1[selector] || [];
+            const mediaRules2 = mediaDict2[selector] || [];
+            const processedSelectors = new Set();
+            const combinedRules = [...mediaRules1];
+
+            mediaRules2.forEach(rule => {
+                const existingRule = mediaRules1.find(r => r.selector === rule.selector);
+                if (existingRule && areRulesDifferent(existingRule.rules, rule.rules)) {
+                    combinedRules.push({ selector: applyPrefix(rule.selector), rules: rule.rules });
+                } else if (!existingRule) {
+                    combinedRules.push(rule);
+                }
+                processedSelectors.add(rule.selector);
+            });
+
+            mergedMediaQueries.push({ selector, rules: combinedRules });
+        });
+
+        return mergedMediaQueries;
+    };
+
+    const mergeKeyframes = (keyframes1, keyframes2) => {
+        const convertToDictionary = (keyframes) => Object.fromEntries(keyframes.map(kf => [kf.selector, kf.rules]));
+        const keyframesDict1 = convertToDictionary(keyframes1), keyframesDict2 = convertToDictionary(keyframes2);
+        const allSelectors = new Set([...Object.keys(keyframesDict1), ...Object.keys(keyframesDict2)]);
+        const mergedKeyframes = [];
+
+        allSelectors.forEach(selector => {
+            const keyframesRules1 = keyframesDict1[selector] || [];
+            const keyframesRules2 = keyframesDict2[selector] || [];
+            const processedSelectors = new Set();
+            const combinedRules = [...keyframesRules1];
+
+            keyframesRules2.forEach(rule => {
+                const existingRule = keyframesRules1.find(r => r.selector === rule.selector);
+                if (existingRule && areRulesDifferent(existingRule.rules, rule.rules)) {
+                    combinedRules.push({ selector: applyPrefix(rule.selector) + "/* Keyframes do segundo arquivo: */", rules: "/*" + rule.rules + "*/" });
+                } else if (!existingRule) {
+                    combinedRules.push(rule);
+                }
+                processedSelectors.add(rule.selector);
+            });
+
+            mergedKeyframes.push({ selector, rules: combinedRules });
+        });
+
+        return mergedKeyframes;
+    };
+
+    const combinedMediaQueries = mergeMediaQueries(media1, media2);
+    const combinedKeyframes = mergeKeyframes(keyframes1, keyframes2);
+
+    const outputCSS = [
+        ...mergedRules.map(rule => `${rule.selector} {\n    ${rule.rules.split(";").filter(Boolean).join(";    ")}\n}`),
+        ...combinedMediaQueries.map(mq => `${mq.selector}\n${mq.rules.map(rule => `    ${rule.selector} {\n        ${rule.rules.split(";").filter(Boolean).join(";        ")}\n    }`).join("\n\n")}\n}`),
+        ...combinedKeyframes.map(kf => `${kf.selector}\n${kf.rules.map(rule => `    ${rule.selector} {\n        ${rule.rules.split(";").filter(Boolean).join(";        ")}\n    }`).join("\n\n")}\n}`)
+    ].join("\n\n");
 
     document.getElementById("result").textContent = outputCSS;
 
